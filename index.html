@@ -1,3 +1,17 @@
+<!-- FieldRules App Prototype v5.9.9 — Sidebar logo left-alignment fix (2026-04-25) -->
+<!-- v5.9.9 changes:
+       The uploaded logomark SVG has viewBox 0 0 395 141, but the actual
+       artwork only spans x=39.5 → 327.8 — i.e. there's ~40px of empty
+       space baked into the left side of the viewBox. After the
+       responsive scaling clamps the SVG to max-height:38px, that dead
+       space renders as ~10–11px of apparent left indent in the sidebar.
+       Compensated with `margin-left:-10px` on the .fr-logo-full svg rule.
+       Brittle by design — if the max-height ever changes, recompute the
+       margin (= leftPadInViewBox * (newMaxHeight / 141)). Cleanest
+       long-term fix would be to re-export the SVG with a tighter
+       viewBox (e.g. "38 28 295 75"), but this preserves the asset
+       Melanie uploaded.
+     No structural / token changes. (2026-04-25) -->
 <!-- FieldRules App Prototype v5.9.8 — Logomark refresh + Quality-state title fix (2026-04-25) -->
 <!-- v5.9.8 changes:
        (1) Sidebar logomark replaced with Melanie's updated SVG asset
@@ -2800,7 +2814,7 @@ body.manual-only .ra-ai-suggest,body.manual-only .ra-ai-reminder{display:none}
 
 /* ─── v5.9.4 fix: sidebar uses Melanie's untouched full logomark SVG (no cropping, no recolor, no re-render) ─── */
 .fr-logo-full{display:flex;align-items:center;width:100%;padding:2px 0}
-.fr-logo-full svg{display:block;width:100%;height:auto;max-height:38px}
+.fr-logo-full svg{display:block;width:100%;height:auto;max-height:38px;margin-left:-10px} /* v5.9.9: compensate for ~40px of empty left padding inside the SVG's viewBox so the logo pins flush-left in the sidebar */
 .sidebar-logo{padding:14px 14px 18px}
 /* ─── /v5.9.4 fix ─── */
 
