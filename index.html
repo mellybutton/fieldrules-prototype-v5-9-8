@@ -1,3 +1,18 @@
+<!-- FieldRules App Prototype v5.9.10 — Sidebar logo left-alignment fix v2 (correct math) (2026-04-25) -->
+<!-- v5.9.10 changes:
+       v5.9.9's -10px margin only compensated for the SVG-internal viewBox
+       padding. There was a second source of empty space I missed: the
+       .fr-logo-full svg rule had width:100% which made the SVG ELEMENT
+       fill the ~192px container width while the artwork inside only
+       rendered at ~106px wide, with default preserveAspectRatio
+       (xMidYMid meet) centering the content — adding ~43px of dead
+       space on each side beyond the viewBox padding.
+       Fix: drop width:100% in favour of width:auto + height:38px on the
+       SVG itself. Now the SVG element renders at its natural width
+       (~106px) with no centering gap. The -10px margin-left still
+       compensates for the in-viewBox padding and the logo pins flush
+       to the left edge of .fr-logo-full's flex container.
+     No tokens / structure changed. (2026-04-25) -->
 <!-- FieldRules App Prototype v5.9.9 — Sidebar logo left-alignment fix (2026-04-25) -->
 <!-- v5.9.9 changes:
        The uploaded logomark SVG has viewBox 0 0 395 141, but the actual
@@ -2814,7 +2829,7 @@ body.manual-only .ra-ai-suggest,body.manual-only .ra-ai-reminder{display:none}
 
 /* ─── v5.9.4 fix: sidebar uses Melanie's untouched full logomark SVG (no cropping, no recolor, no re-render) ─── */
 .fr-logo-full{display:flex;align-items:center;width:100%;padding:2px 0}
-.fr-logo-full svg{display:block;width:100%;height:auto;max-height:38px;margin-left:-10px} /* v5.9.9: compensate for ~40px of empty left padding inside the SVG's viewBox so the logo pins flush-left in the sidebar */
+.fr-logo-full svg{display:block;width:auto;height:38px;max-width:100%;margin-left:-10px} /* v5.9.10: render SVG at its natural ~106px width (height-driven) instead of stretching to 100% — eliminates the centering gap. -10px margin compensates for the in-viewBox padding so the logo pins flush-left. */
 .sidebar-logo{padding:14px 14px 18px}
 /* ─── /v5.9.4 fix ─── */
 
